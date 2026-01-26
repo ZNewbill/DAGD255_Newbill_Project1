@@ -8,6 +8,12 @@ class Player extends RadialObject {
   
   void update() {
     
+    
+    if(leftPressed && !pLeftPressed) {
+     Sword s = new Sword(position.x, position.y);
+     swords.add(s);
+    }
+    
     position.x = mouseX;
     position.y = mouseY;
 
