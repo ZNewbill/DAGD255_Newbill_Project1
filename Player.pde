@@ -1,4 +1,7 @@
 class Player extends RadialObject {
+  
+  float easingFactor = 10;
+  
   Player() {
     position.x = width/2;
     position.y = height/2;
@@ -14,9 +17,14 @@ class Player extends RadialObject {
      swords.add(s);
     }
     
-    position.x = mouseX;
-    position.y = mouseY;
-
+    float dx = mouseX - position.x;
+    float dy = mouseY - position.y;
+    
+    position.x += dx * easingFactor * dt;
+    position.y += dy * easingFactor * dt;
+    
+    PlayerParticle p = new PlayerParticle(position.x, position.y);
+    particles.add(p);
   }
   
   void draw() {
@@ -26,3 +34,16 @@ class Player extends RadialObject {
   }
 
 }
+
+
+
+//This will be wherever you spawn a bullet, most likely in the Player class's update tab
+
+//if(leftPressed && !pLeftPressed) {
+  
+//  for (int i = 0; i < 2; i++){
+//    Bullet b = new BulleSt(x, y, radians(45) * i);
+//    bullets.add(b);
+//  }
+  
+//}
