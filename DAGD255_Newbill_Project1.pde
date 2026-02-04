@@ -2,6 +2,7 @@
 
 float dt, prevTime = 0;
 boolean leftPressed, pLeftPressed;
+boolean rightPressed, pRightPressed;
 
 Player player;
 ArrayList<Sword> swords = new ArrayList();
@@ -87,6 +88,7 @@ void draw() {
   // Prepare for next frame under this line...
   
   pLeftPressed = leftPressed;
+  pRightPressed = rightPressed;
 }
 
 void mousePressed() {

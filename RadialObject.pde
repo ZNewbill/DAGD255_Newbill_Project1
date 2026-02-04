@@ -1,5 +1,6 @@
 class RadialObject {
- 
+  
+  float x, y;
   PVector position = new PVector();
   float radius;
   boolean isDead = false;
