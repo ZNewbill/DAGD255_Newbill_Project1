@@ -93,10 +93,12 @@ void draw() {
 
 void mousePressed() {
   if(mouseButton == LEFT) leftPressed = true;
+  if(mouseButton == RIGHT) rightPressed = true;
 }
 
 void mouseReleased() {
   if(mouseButton == LEFT) leftPressed = false;
+  if(mouseButton == RIGHT) rightPressed = false;
 }
 
 void calcDeltaTime() {
