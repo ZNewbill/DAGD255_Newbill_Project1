@@ -7,6 +7,7 @@ boolean rightPressed, pRightPressed;
 Player player;
 ArrayList<Sword> swords = new ArrayList();
 ArrayList<Enemy> enemies = new ArrayList();
+ArrayList<Bullet> bullets = new ArrayList();
 
 ArrayList<Particle> particles = new ArrayList();
 
@@ -46,11 +47,18 @@ void draw() {
     e.update();
     
     if(e.checkCollision(player)) {
-      e.isDead = true;
+      player.radius--;
     }
     
     if(e.isDead) enemies.remove(e);
   }
+    for(int i = 0; i < bullets.size(); i++) {
+     Bullet b = bullets.get(i);
+     b.update();
+     
+     
+     if(b.isDead) bullets.remove(b);
+    }
   
   for(int i = 0; i < particles.size(); i++) {
     Particle p = particles.get(i);
