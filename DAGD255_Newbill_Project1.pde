@@ -50,6 +50,16 @@ void draw() {
       player.radius--;
     }
     
+    for(int j = 0; j < bullets.size(); j++) {
+     Bullet b = bullets.get(j);
+     
+     if (b.checkCollision(e)) {
+       b.isDead = true;
+       e.isDead = true;
+       
+     }
+    }
+    
     if(e.isDead) enemies.remove(e);
   }
     for(int i = 0; i < bullets.size(); i++) {
@@ -84,6 +94,11 @@ void draw() {
   for(int i = 0; i < particles.size(); i++) {
     Particle p = particles.get(i);
     p.draw();
+  }
+  
+  for(int i = 0; i < bullets.size(); i++) {
+    Bullet b = bullets.get(i);
+    b.draw();
   }
   
   player.draw();
