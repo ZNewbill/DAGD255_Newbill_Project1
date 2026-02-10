@@ -15,7 +15,7 @@ class MagneticEnemy extends Enemy {
     
     position.x += speed * cos(angleToPlayer) * dt;
     position.y += speed * sin(angleToPlayer) * dt;
-    
+    super.update();
   }
   
   void draw() {

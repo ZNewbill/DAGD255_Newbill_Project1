@@ -5,7 +5,7 @@ class Bullet extends RadialObject {
   Bullet(float x, float y) {
    this.x = x;
    this.y = y;
-   radius = 4;
+   radius = 10;
    
   }
   
@@ -14,6 +14,7 @@ class Bullet extends RadialObject {
     y -= speed * dt;
     
     if(y < -radius) isDead = true;
+    super.update();
   }
   
   void draw() {

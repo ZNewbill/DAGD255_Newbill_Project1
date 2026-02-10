@@ -1,4 +1,5 @@
 // Copyright Zander Newbill 2026
+// git commits vandalized by rylynn
 
 float dt, prevTime = 0;
 boolean leftPressed, pLeftPressed;
@@ -8,6 +9,7 @@ Player player;
 ArrayList<Sword> swords = new ArrayList();
 ArrayList<Enemy> enemies = new ArrayList();
 ArrayList<Bullet> bullets = new ArrayList();
+ArrayList<MagneticEnemy> magneticEnemies = new ArrayList();
 
 ArrayList<Particle> particles = new ArrayList();
 
@@ -29,7 +31,7 @@ void draw() {
   magEnemySpawnDelay -= dt;
   if(magEnemySpawnDelay <= 0) {
     MagneticEnemy e = new MagneticEnemy();
-    enemies.add(e);
+    magneticEnemies.add(e);
     magEnemySpawnDelay = random(0.5, 1.5);
   }
   
@@ -51,17 +53,41 @@ void draw() {
     }
     
     for(int j = 0; j < bullets.size(); j++) {
-     Bullet b = bullets.get(j);
+       Bullet b = bullets.get(j);
      
-     if (b.checkCollision(e)) {
+     if (e.checkCollision(b)) {
        b.isDead = true;
        e.isDead = true;
-       
-     }
+       println("hit");
+       }
     }
     
     if(e.isDead) enemies.remove(e);
   }
+  
+  for(int i = 0; i < magneticEnemies.size(); i++) {
+    MagneticEnemy e = magneticEnemies.get(i);
+    e.update();
+    
+    if(e.checkCollision(player)) {
+      player.radius--;
+    }
+    
+    for(int o = 0; o < bullets.size(); o++) {
+       Bullet b = bullets.get(o);
+     
+     if (e.checkCollision(b)) {
+       b.isDead = true;
+       e.isDead = true;
+       println("hit");
+       }
+    }
+    
+    if(e.isDead) enemies.remove(e);
+  }
+  
+  
+  
     for(int i = 0; i < bullets.size(); i++) {
      Bullet b = bullets.get(i);
      b.update();
@@ -88,6 +114,11 @@ void draw() {
   
   for(int i = 0; i < enemies.size(); i++) {
     Enemy e = enemies.get(i);
+    e.draw();
+  }
+  
+  for(int i = 0; i < magneticEnemies.size(); i++) {
+    MagneticEnemy e = magneticEnemies.get(i);
     e.draw();
   }
   

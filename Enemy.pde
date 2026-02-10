@@ -7,7 +7,7 @@ class Enemy extends RadialObject {
   }
   
   void update() {
-    
+    super.update();
   }
   
   void draw() {
