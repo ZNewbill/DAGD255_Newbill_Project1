@@ -1,7 +1,7 @@
 // Copyright Zander Newbill 2026
 // git commits vandalized by rylynn
 
-float dt, prevTime = 0;
+float dt, prevTime = 0; //required to setup Delta Time function
 boolean leftPressed, pLeftPressed;
 boolean rightPressed, pRightPressed;
 
@@ -33,7 +33,7 @@ void draw() {
     MagneticEnemy e = new MagneticEnemy();
     magneticEnemies.add(e);
     magEnemySpawnDelay = random(0.5, 1.5);
-  }
+  } // This function converts the Enemy Spawn timer to Delta Time.
   
   
   // Update objects under this line...
@@ -159,4 +159,4 @@ void calcDeltaTime() {
   float currTime = millis();
   dt = (currTime - prevTime) / 1000.0;
   prevTime = currTime;
-}
+} // Delta Time function

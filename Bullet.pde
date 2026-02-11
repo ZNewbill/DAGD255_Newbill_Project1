@@ -11,7 +11,7 @@ class Bullet extends RadialObject {
   
   void update() {
     
-    y -= speed * dt;
+    y -= speed * dt; //multiplies speed by Delta Time
     
     if(y < -radius) isDead = true;
     super.update();
