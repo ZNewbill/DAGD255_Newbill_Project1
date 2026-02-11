@@ -2,8 +2,8 @@
 // git commits vandalized by rylynn
 
 float dt, prevTime = 0; //required to setup Delta Time function
-boolean leftPressed, pLeftPressed;
-boolean rightPressed, pRightPressed;
+boolean leftPressed, pLeftPressed; //required for left mouse button functionality
+boolean rightPressed, pRightPressed; //required for right moue button functionality
 
 Player player;
 ArrayList<Sword> swords = new ArrayList();
@@ -155,8 +155,8 @@ void mouseReleased() {
   if(mouseButton == RIGHT) rightPressed = false;
 }
 
-void calcDeltaTime() {
+void calcDeltaTime() { // Delta Time function
   float currTime = millis();
   dt = (currTime - prevTime) / 1000.0;
   prevTime = currTime;
-} // Delta Time function
+}
