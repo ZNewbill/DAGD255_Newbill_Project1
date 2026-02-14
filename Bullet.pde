@@ -3,23 +3,23 @@ class Bullet extends RadialObject {
   float speed = 1000;
   
   Bullet(float x, float y) {
-   this.x = x;
-   this.y = y;
+   position.x = x;
+   position.y = y;
    radius = 10;
    
   }
   
   void update() {
     
-    y -= speed * dt; //multiplies speed by Delta Time
+    position.y -= speed * dt; //multiplies speed by Delta Time
     
-    if(y < -radius) isDead = true;
+    if(position.y < -radius) isDead = true;
     super.update();
   }
   
   void draw() {
    fill(#A824F0);
-   ellipse(x, y, radius * 2, radius * 2);
+   ellipse(position.x, position.y, radius * 2, radius * 2);
   }
   
 }
