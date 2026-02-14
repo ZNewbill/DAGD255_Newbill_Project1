@@ -43,31 +43,11 @@ void draw() {
     s.update();
     if(s.isDead) swords.remove(s);
   }
-  
-  for(int i = 0; i < enemies.size(); i++) {
-    Enemy e = enemies.get(i);
-    e.update();
-    
-    if(e.checkCollision(player)) {
-      player.radius--;
-    }
-    
-    for(int j = 0; j < bullets.size(); j++) {
-       Bullet b = bullets.get(j);
-     
-     if (e.checkCollision(b)) {
-       b.isDead = true;
-       e.isDead = true;
-       println("hit");
-       }
-    }
-    
-    if(e.isDead) enemies.remove(e);
-  }
+ 
   
   for(int i = 0; i < magneticEnemies.size(); i++) {
     MagneticEnemy e = magneticEnemies.get(i);
-    e.update();
+    
     
     if(e.checkCollision(player)) {
       player.radius--;
@@ -82,7 +62,7 @@ void draw() {
        println("hit");
        }
     }
-    
+    e.update();
     if(e.isDead) enemies.remove(e);
   }
   
