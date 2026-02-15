@@ -10,10 +10,11 @@ ArrayList<Sword> swords = new ArrayList();
 ArrayList<Enemy> enemies = new ArrayList();
 ArrayList<Bullet> bullets = new ArrayList();
 ArrayList<MagneticEnemy> magneticEnemies = new ArrayList();
-
+ArrayList<Turret> turrets = new ArrayList();
 ArrayList<Particle> particles = new ArrayList();
 
 float magEnemySpawnDelay = 1;
+float damageDelay = 0; //delays the enemy from damaging the player for x amount of time
 
 void setup() {
   size(1280, 720);
@@ -35,6 +36,13 @@ void draw() {
     magEnemySpawnDelay = random(0.5, 1.5);
   } // This function converts the Enemy Spawn timer to Delta Time.
   
+  damageDelay -= dt;
+  if(damageDelay > 0) {
+     player.radius -= 0;
+     damageDelay--;
+    }
+  
+  
   
   // Update objects under this line...
   
@@ -49,8 +57,9 @@ void draw() {
     MagneticEnemy e = magneticEnemies.get(i);
     
     
-    if(e.checkCollision(player)) {
-      player.radius--;
+    if(e.checkCollision(player) && damageDelay <= 0) {
+      player.radius-= 5;
+      damageDelay = 50;
       if(player.radius < 10){
         player.isDead = true;
         if(player.isDead){

@@ -1,11 +1,12 @@
-class StaticEnemy extends Enemy{
+class Turret extends Enemy{
   
     
   float angleToPlayer;
+  boolean isDead = false;
   
-  StaticEnemy() {
+  Turret() {
     radius = random(20, 40);
-    speed = random(100, 200);
+    
     
     position.x = random(width);
     position.y = -50;
@@ -14,8 +15,10 @@ class StaticEnemy extends Enemy{
   void update() {
     calcAngleToPlayer();
     
-    position.x += speed * cos(angleToPlayer) * dt;
-    position.y += speed * sin(angleToPlayer) * dt;
+    if(isDead == false) {
+       Bullet b = new Bullet(position.x, position.y);
+       bullets.add(b);
+    }
     super.update();
   }
   

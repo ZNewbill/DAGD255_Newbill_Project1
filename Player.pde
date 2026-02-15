@@ -24,6 +24,15 @@ class Player extends RadialObject {
        bullets.add(b);
     }
     
+    if(weaponType == 3 && leftPressed && !pLeftPressed) {
+  
+   for (int i = 0; i < 2; i++){
+    Bullet b = new Bullet(position.x / radians(45), position.y);
+    bullets.add(b);
+  }
+  
+}
+    
     float dx = mouseX - position.x;
     float dy = mouseY - position.y;
     
@@ -41,16 +50,3 @@ class Player extends RadialObject {
   }
 
 }
-
-
-
-//This will be wherever you spawn a bullet, most likely in the Player class's update tab
-
-//if(leftPressed && !pLeftPressed) {
-  
-//  for (int i = 0; i < 2; i++){
-//    Bullet b = new Bullets(x, y, radians(45) * i);
-//    bullets.add(b);
-//  }
-  
-//}
