@@ -74,7 +74,6 @@ void draw() {
      if (e.checkCollision(b)) {
        b.isDead = true;
        e.isDead = true;
-       println("hit");
        }
     }
     
@@ -82,7 +81,6 @@ void draw() {
       Sword s = swords.get(j);
       
       if(e.checkCollision(s)) {
-       s.isDead = true;
        e.isDead = true;
       }
     }
