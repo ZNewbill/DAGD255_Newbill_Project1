@@ -1,6 +1,7 @@
 class Player extends RadialObject {
   
   float easingFactor = 10;
+  int weaponType = 1;
   
   Player() {
     position.x = width/2;
@@ -12,14 +13,16 @@ class Player extends RadialObject {
   void update() {
     
     
-    if(leftPressed && !pLeftPressed) {
-       Bullet b = new Bullet(position.x, position.y);
-       bullets.add(b);
-    }
-     if(rightPressed && !pRightPressed){
+    
+     if(weaponType == 1 && leftPressed && !pLeftPressed){
        Sword s = new Sword(position.x, position.y);
      swords.add(s);
      }
+    
+    if(weaponType == 2 && leftPressed && !pLeftPressed) {
+       Bullet b = new Bullet(position.x, position.y);
+       bullets.add(b);
+    }
     
     float dx = mouseX - position.x;
     float dy = mouseY - position.y;
@@ -46,7 +49,7 @@ class Player extends RadialObject {
 //if(leftPressed && !pLeftPressed) {
   
 //  for (int i = 0; i < 2; i++){
-//    Bullet b = new BulleSt(x, y, radians(45) * i);
+//    Bullet b = new Bullets(x, y, radians(45) * i);
 //    bullets.add(b);
 //  }
   

@@ -53,7 +53,7 @@ void draw() {
       player.radius--;
       if(player.radius < 10){
         player.isDead = true;
-        (player.isDead) {
+        if(player.isDead){
           
         }
       }
@@ -67,6 +67,15 @@ void draw() {
        e.isDead = true;
        println("hit");
        }
+    }
+    
+    for(int j = 0; j <= swords.size()-1; j++) {
+      Sword s = swords.get(j);
+      
+      if(e.checkCollision(s)) {
+       s.isDead = true;
+       e.isDead = true;
+      }
     }
     e.update();
     if(e.isDead) magneticEnemies.remove(e);
