@@ -181,6 +181,7 @@ void draw() {
     if(p.isDead) particles.remove(p);
   }
   
+  /*
   for(int i = 0; i < Pickup.size(); i++) {
    Pickup x = pickups.get(i);
    x.update();
@@ -193,6 +194,7 @@ void draw() {
   }
     
   }
+  */
   player.update();
   
   
@@ -233,10 +235,12 @@ void draw() {
     b.draw();
   }
   
+  /*
   for(int i = 0; i < pickups.size(); i++) {
    Pickup x = pickups.get(i);
    x.draw();
   }
+  */
   
   player.draw();
   
