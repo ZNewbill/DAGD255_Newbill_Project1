@@ -5,11 +5,11 @@ class Turret extends Enemy{
   boolean isDead = false;
   
   Turret() {
-    radius = random(20, 40);
+    radius = random(45, 60);
     
     
     position.x = random(width);
-    position.y = -50;
+    position.y = random(height);
   }
   
   void update() {
@@ -24,7 +24,7 @@ class Turret extends Enemy{
   
   void draw() {
     stroke(0);
-    fill(255, 0, 0);
+    fill(#EA00F7);
     ellipse(position.x, position.y, radius*2, radius*2);
   }
   

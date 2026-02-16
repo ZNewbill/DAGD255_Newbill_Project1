@@ -14,6 +14,7 @@ ArrayList<Turret> turrets = new ArrayList();
 ArrayList<Particle> particles = new ArrayList();
 
 float magEnemySpawnDelay = 1;
+float turretSpawnDelay = 1;
 float damageDelay = 0; //delays the enemy from damaging the player for x amount of time
 
 void setup() {
@@ -36,6 +37,13 @@ void draw() {
     magEnemySpawnDelay = random(0.5, 1.5);
   } // This function converts the Enemy Spawn timer to Delta Time.
   
+  turretSpawnDelay -= dt;
+  if(turretSpawnDelay <= 0) {
+    Turret t = new Turret();
+    turrets.add(t);
+    turretSpawnDelay = random(1.0, 5.0);
+  }
+  
   damageDelay -= dt;
   if(damageDelay > 0) {
      player.radius -= 0;
@@ -53,7 +61,7 @@ void draw() {
   }
  
   
-  for(int i = 0; i <= magneticEnemies.size()-1; i++) {
+  for(int i = 0; i < magneticEnemies.size(); i++) {
     MagneticEnemy e = magneticEnemies.get(i);
     
     
@@ -68,7 +76,7 @@ void draw() {
       }
     }
     
-    for(int o = 0; o <= bullets.size()-1; o++) {
+    for(int o = 0; o < bullets.size(); o++) {
        Bullet b = bullets.get(o);
      
      if (e.checkCollision(b)) {
@@ -77,7 +85,7 @@ void draw() {
        }
     }
     
-    for(int j = 0; j <= swords.size()-1; j++) {
+    for(int j = 0; j < swords.size(); j++) {
       Sword s = swords.get(j);
       
       if(e.checkCollision(s)) {
@@ -88,9 +96,30 @@ void draw() {
     if(e.isDead) magneticEnemies.remove(e);
   }
   
+   for(int i = 0; i < turrets.size(); i++){
+   Turret t = turrets.get(i);
+       
+    for(int j = 0; j < swords.size(); j++){
+      Sword s = swords.get(j);
+         
+       if(t.checkCollision(s)){
+        t.isDead = true;
+        if(t.isDead) turrets.remove(t);
+       }
+   
+    }
+    for(int j = 0; j < bullets.size(); j++) {
+       Bullet b = bullets.get(j);
+       
+         if(t.checkCollision(b)){
+          t.isDead = true;
+          b.isDead = true;
+         }
+    }
+   
+  }
   
-  
-    for(int i = 0; i <= bullets.size()-1; i++) {
+    for(int i = 0; i < bullets.size(); i++) {
      Bullet b = bullets.get(i);
      b.update();
      
@@ -122,6 +151,10 @@ void draw() {
   for(int i = 0; i < magneticEnemies.size(); i++) {
     MagneticEnemy e = magneticEnemies.get(i);
     e.draw();
+  }
+  for(int i = 0; i < turrets.size(); i++) {
+     Turret t = turrets.get(i);
+     t.draw();
   }
   
   for(int i = 0; i < particles.size(); i++) {
