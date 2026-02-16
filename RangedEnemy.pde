@@ -1,6 +1,7 @@
 class RangedEnemy extends Enemy {
  
    float angleToPlayer;
+   boolean isDead = false;
   
   RangedEnemy() {
     radius = random(20, 40);
@@ -16,6 +17,12 @@ class RangedEnemy extends Enemy {
     position.x += speed * cos(angleToPlayer) * dt;
     position.y += speed * sin(angleToPlayer) * dt;
     super.update();
+    
+    if(isDead == false) {
+     calcAngleToPlayer();
+     Bullet b = new Bullet(position.x, position.y);
+     bullets.add(b);
+    }
   }
   
   void draw() {
