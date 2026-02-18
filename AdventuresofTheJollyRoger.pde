@@ -181,20 +181,21 @@ void draw() {
     if(p.isDead) particles.remove(p);
   }
   
-  /*
-  for(int i = 0; i < Pickup.size(); i++) {
-   Pickup x = pickups.get(i);
-   x.update();
-     if(x.checkCollision(player)) {
-      
-   
-   if(x.isDead) pickups.remove(x);
-   
-   
-  }
+  
+  for(int i = 0; i < pickups.size(); i++) {
+     Pickup x = pickups.get(i);
+     x.update();
+     if(x.checkCollision(player)){
+      x.isDead = true;
+      player.weaponType = 2;
+      player.radius += 10;
+      if(x.isDead) {
+       pickups.remove(x); 
+      }
+     }
     
   }
-  */
+  
   player.update();
   
   
@@ -235,12 +236,12 @@ void draw() {
     b.draw();
   }
   
-  /*
+  
   for(int i = 0; i < pickups.size(); i++) {
    Pickup x = pickups.get(i);
    x.draw();
   }
-  */
+  
   
   player.draw();
   
