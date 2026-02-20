@@ -14,11 +14,13 @@ ArrayList<Turret> turrets = new ArrayList();
 ArrayList<Particle> particles = new ArrayList();
 ArrayList<RangedEnemy> rangedEnemies = new ArrayList();
 ArrayList<Pickup> pickups = new ArrayList();
+ArrayList<SwordPickup> swordPickups = new ArrayList();
 
 float magEnemySpawnDelay = 1;
 float turretSpawnDelay = 1;
 float rangeSpawnDelay = 1;
 float pickupSpawnDelay = 5;
+float swordPickupSpawnDelay = 10;
 //float enemyMoveDelay = 0;
 float damageDelay = 0; //delays the enemy from damaging the player for x amount of time
 
@@ -61,6 +63,12 @@ void draw() {
      Pickup x = new Pickup();
      pickups.add(x);
      pickupSpawnDelay = random(1.5, 5.0);
+  }
+  swordPickupSpawnDelay -= dt;
+  if(swordPickupSpawnDelay <= 0) {
+     SwordPickup y = new SwordPickup();
+     swordPickups.add(y);
+     swordPickupSpawnDelay = random(1.5, 5.0);
   }
   
   damageDelay -= dt;
@@ -133,12 +141,14 @@ void draw() {
        }
    
     }
-    for(int j = 0; j < bullets.size(); j++) {
-       Bullet b = bullets.get(j);
+    for(int o = 0; o < bullets.size(); o++) {
+       Bullet b = bullets.get(o);
        
          if(t.checkCollision(b)){
           t.isDead = true;
           b.isDead = true;
+          t.isDead = true;
+        if(t.isDead) turrets.remove(t);
          }
     }
    
@@ -156,12 +166,14 @@ void draw() {
        }
    
     }
-    for(int j = 0; j < bullets.size(); j++) {
-       Bullet b = bullets.get(j);
+    for(int o = 0; o < bullets.size(); o++) {
+       Bullet b = bullets.get(o);
        
          if(r.checkCollision(b)){
           r.isDead = true;
           b.isDead = true;
+           r.isDead = true;
+        if(r.isDead) rangedEnemies.remove(r);
          }
     }
    
@@ -185,17 +197,28 @@ void draw() {
   for(int i = 0; i < pickups.size(); i++) {
      Pickup x = pickups.get(i);
      x.update();
-     if(x.checkCollision(player)){
-      x.isDead = true;
-      player.weaponType = 2;
-      player.radius += 10;
-      if(x.isDead) {
-       pickups.remove(x); 
-      }
-     }
-    
+       if(x.checkCollision(player)){
+        x.isDead = true;
+        player.weaponType = 2;
+        player.radius += 10;
+          if(x.isDead) {
+           pickups.remove(x); 
+          }
+       }
   }
   
+  for(int i = 0; i < swordPickups.size(); i++) {
+     SwordPickup y = swordPickups.get(i);
+     y.update();
+       if(y.checkCollision(player)){
+        y.isDead = true;
+        player.weaponType = 1;
+        player.radius += 10;
+          if(y.isDead) {
+           swordPickups.remove(y); 
+          }
+       }
+  }
   player.update();
   
   
@@ -240,6 +263,11 @@ void draw() {
   for(int i = 0; i < pickups.size(); i++) {
    Pickup x = pickups.get(i);
    x.draw();
+  }
+  
+  for(int i = 0; i < swordPickups.size(); i++) {
+   SwordPickup y = swordPickups.get(i);
+   y.draw();
   }
   
   
